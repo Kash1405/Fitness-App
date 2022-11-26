@@ -9,10 +9,10 @@ import 'package:sync_fit/api/database.dart';
 import 'package:sync_fit/models/activity.dart';
 import 'package:sync_fit/models/heartbeat.dart';
 import 'package:sync_fit/pages/account/account_page.dart';
-import 'package:sync_fit/pages/activity/activity_page.dart';
-import 'package:sync_fit/pages/home/widgets/activity_cards.dart';
-import 'package:sync_fit/pages/home/widgets/mini_cards.dart';
-import 'package:sync_fit/pages/home/widgets/web_cards.dart';
+import 'package:sync_fit/pages/home/home_page.dart';
+import 'package:sync_fit/pages/activity/widgets/activity_cards.dart';
+import 'package:sync_fit/pages/activity/widgets/mini_cards.dart';
+import 'package:sync_fit/pages/activity/widgets/web_cards.dart';
 import 'package:sync_fit/pages/settings/settings_screen.dart';
 import 'package:sync_fit/pages/webview/webview.dart';
 import 'package:sync_fit/utils/app_colors.dart';
@@ -41,15 +41,15 @@ final spo2Provider = FutureProvider((ref) async {
   return database.getSpo2CardData();
 });
 
-class HomePage extends ConsumerWidget {
-  static const routename = '/home';
-  HomePage({super.key});
+class ActivityPage extends ConsumerWidget {
+  static const routename = '/activity';
+  ActivityPage({super.key});
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const ActivityScreen(),
     const SettingsScreen(),
     const AccountPage(),
+    const ActivityScreen(),
   ];
 
   @override
@@ -79,9 +79,9 @@ class HomePage extends ConsumerWidget {
             BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.house), label: ''),
             BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.boltLightning), label: ''),
-            BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.gear), label: ''),
+            BottomNavigationBarItem(
+                icon: FaIcon(FontAwesomeIcons.user), label: ''),
             BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.user), label: ''),
           ],
@@ -91,8 +91,8 @@ class HomePage extends ConsumerWidget {
   }
 }
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({
+class ActivityScreen extends ConsumerWidget {
+  const ActivityScreen({
     Key? key,
   }) : super(key: key);
 
@@ -113,11 +113,11 @@ class HomeScreen extends ConsumerWidget {
                 Row(
                   children: [
                     AutoSizeText(
-                      'Welcome back, Abhigyan!',
+                      DateFormat("EEEE, d MMM").format(DateTime.now()),
                       style: const TextStyle(
                         fontFamily: 'SF-Pro Display',
                         fontSize: 18,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w200,
                         color: Colors.black,
                       ),
                     ),
@@ -130,22 +130,23 @@ class HomeScreen extends ConsumerWidget {
                           }
                           router.push(WebView.routename);
                         },
-                        icon: const FaIcon(FontAwesomeIcons.faceGrin))
+                        // icon: const FaIcon(FontAwesomeIcons.om))
+                        icon: const FaIcon(FontAwesomeIcons.user))
                   ],
                 ),
-                const SizedBox(height: 1),
+                const SizedBox(height: 8),
                 const AutoSizeText(
-                  'Your Analytics',
+                  'Competition',
                   style: TextStyle(
                     fontFamily: 'SF-Pro Display',
-                    fontSize: 30,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 1),
+                const SizedBox(height: 16),
                 const AutoSizeText(
-                  'Activity',
+                  'Activities',
                   style: TextStyle(
                     fontFamily: 'SF-Pro Display',
                     fontSize: 30,
@@ -153,75 +154,55 @@ class HomeScreen extends ConsumerWidget {
                     color: Colors.black,
                   ),
                 ),
-                activityData.when(
-                  data: (data) => ActivityCard(
-                    activity: data,
-                  ),
-                  loading: () => const SizedBox(),
-                  error: (error, stack) => const SizedBox(),
-                ),
+                // activityData.when(
+                //   data: (data) => ActivityCard(
+                //     activity: data,
+                //   ),
+                //   loading: () => const SizedBox(),
+                //   error: (error, stack) => const SizedBox(),
+                // ),
                 // const ActivityCard(),
                 MiniCard(
-                  icon: FontAwesomeIcons.dumbbell,
-                  title: 'Strength',
+                  icon: FontAwesomeIcons.running,
+                  title: 'Run',
                   time: DateFormat.jm().format(DateTime.now()),
-                  content: '2000',
-                  color: Colors.red.shade400,
-                  secondaryColor: AppColors.paleBlue,
-                  onTap: () {},
-                ),
-                MiniCard(
-                  icon: FontAwesomeIcons.personSwimming,
-                  title: 'Swimming',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: '3400',
-                  color: AppColors.oceanBlue,
-                  secondaryColor: Color.fromARGB(255, 2, 64, 114),
-                  onTap: () {},
-                ),
-                MiniCard(
-                  icon: FontAwesomeIcons.car,
-                  title: 'Speed',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: '4500',
-                  color: AppColors.yellow,
-                  secondaryColor: Colors.black,
-                  onTap: () {},
-                ),
-                MiniCard(
-                  icon: FontAwesomeIcons.bed,
-                  title: 'Sleep',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: '7h 30m',
+                  content: 'Start running',
                   color: AppColors.parrotGreen,
                   secondaryColor: AppColors.paleGreen,
                   onTap: () {},
                 ),
-
-                heartrateData.when(
-                  data: (data) => MiniCard(
-                      icon: FontAwesomeIcons.solidHeart,
-                      title: 'Heart Rate',
-                      time: DateFormat.jm().format(DateTime.now()),
-                      content: '${(data.max + data.min) ~/ 2} bpm',
-                      color: AppColors.heartRed.withOpacity(0.4),
-                      secondaryColor: Colors.red.shade900,
-                      onTap: () {}),
-                  loading: () => const SizedBox(),
-                  error: (error, stack) => const SizedBox(),
-                ),
                 MiniCard(
-                    icon: FontAwesomeIcons.water,
-                    title: 'SpO2',
+                    icon: FontAwesomeIcons.hiking,
+                    title: 'Hike',
                     time: DateFormat.jm().format(DateTime.now()),
-                    content: '98%',
+                    content: 'Start hiking',
                     color: AppColors.oceanBlue,
                     secondaryColor: AppColors.paleBlue,
                     onTap: () {}),
+                MiniCard(
+                    icon: FontAwesomeIcons.dumbbell,
+                    title: 'Exercise',
+                    time: DateFormat.jm().format(DateTime.now()),
+                    content: 'Start Exercising',
+                    color: AppColors.heartRed.withOpacity(0.4),
+                    secondaryColor: Colors.red.shade900,
+                    onTap: () {}),
+                // heartrateData.when(
+                //   data: (data) => MiniCard(
+                //       icon: FontAwesomeIcons.solidHeart,
+                //       title: 'Heart Rate',
+                //       time: DateFormat.jm().format(DateTime.now()),
+                //       content: '${(data.max + data.min) ~/ 2} bpm',
+                //       color: AppColors.heartRed.withOpacity(0.4),
+                //       secondaryColor: Colors.red.shade900,
+                //       onTap: () {}),
+                //   loading: () => const SizedBox(),
+                //   error: (error, stack) => const SizedBox(),
+                // ),
 
                 const SizedBox(height: 30),
                 const AutoSizeText(
-                  'Articles',
+                  'Leaderboard',
                   style: TextStyle(
                     fontFamily: 'SF-Pro Display',
                     fontSize: 30,
@@ -233,6 +214,16 @@ class HomeScreen extends ConsumerWidget {
                   onTap: () {},
                   title: 'How to get a good night\'s sleep',
                 ),
+                const SizedBox(height: 30),
+                // const AutoSizeText(
+                //   'Recipe of the day',
+                //   style: TextStyle(
+                //     fontFamily: 'SF-Pro Display',
+                //     fontSize: 30,
+                //     fontWeight: FontWeight.w600,
+                //     color: Colors.black,
+                //   ),
+                // ),
               ],
             ),
           ),
