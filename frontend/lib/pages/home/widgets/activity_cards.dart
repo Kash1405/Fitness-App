@@ -19,7 +19,7 @@ class ActivityCard extends ConsumerWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 1),
         borderRadius: BorderRadius.circular(16),
-        color: AppColors.yellow,
+        color: Colors.green,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,9 +28,9 @@ class ActivityCard extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              miniTile('Goal (cal)', '${activity.calories}'),
-              miniTile('Steps', '${activity.step}'),
-              miniTile('Distance (miles)', '${activity.distance}'),
+              miniTile('Goal (cal)', '1950'),
+              miniTile('Steps', '17530'),
+              miniTile('Distance (miles)', '14.7'),
             ],
           ),
           Flexible(
@@ -40,8 +40,10 @@ class ActivityCard extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: PieChart(
                 dataMap: {
-                  'StepGoal': activity.stepGoal.toDouble(),
-                  'step': activity.step.toDouble(),
+                  'StepGoal': 20000.00,
+                  'step': 17530.00,
+                  //'StepGoal': activity.stepGoal.toDouble(),
+                  //'step': activity.step.toDouble(),
                 },
                 initialAngleInDegree: 10 * pi,
                 ringStrokeWidth: 32,
@@ -57,8 +59,8 @@ class ActivityCard extends ConsumerWidget {
                   showLegendsInRow: false,
                 ),
                 colorList: [
-                  const Color(0xff3F1B25),
-                  AppColors.parrotGreen,
+                  Color.fromARGB(255, 41, 5, 139),
+                  AppColors.yellow,
                 ],
               ),
             ),
@@ -78,14 +80,14 @@ class ActivityCard extends ConsumerWidget {
               fontSize: 17,
               fontFamily: 'SF-Pro Display',
               fontWeight: FontWeight.w400,
-              color: Color(0xffBD8800)),
+              color: Color.fromARGB(255, 0, 0, 0)),
         ),
         AutoSizeText(second,
             style: const TextStyle(
                 fontSize: 20,
                 fontFamily: 'SF-Pro Display',
                 fontWeight: FontWeight.w900,
-                color: Colors.black)),
+                color: Color.fromARGB(255, 111, 0, 0))),
       ],
     );
   }

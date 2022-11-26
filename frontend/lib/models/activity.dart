@@ -52,7 +52,8 @@ class Activity {
 
   String toJson() => json.encode(toMap());
 
-  factory Activity.fromJson(String source) => Activity.fromMap(json.decode(source));
+  factory Activity.fromJson(String source) =>
+      Activity.fromMap(json.decode(source));
 
   @override
   String toString() {
