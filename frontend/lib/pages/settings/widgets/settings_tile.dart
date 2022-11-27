@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sync_fit/main.dart';
+import 'package:sync_fit/pages/home/home_page.dart';
 import 'package:sync_fit/providers/providers.dart';
 
 class SettingsTile extends ConsumerWidget {
   final String title;
   final IconData icon;
   final VoidCallback onTap;
-  const SettingsTile({super.key, required this.title, required this.icon, required this.onTap});
+  const SettingsTile(
+      {super.key,
+      required this.title,
+      required this.icon,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -68,7 +73,7 @@ class LogoutButton extends ConsumerWidget {
           final route = GoRouter.of(context);
           await ref.read(authApiProvider).logout();
           ref.refresh(futureTokensProvider);
-          route.go(AuthChecker.routename);
+          route.go(HomePage.routename);
         },
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

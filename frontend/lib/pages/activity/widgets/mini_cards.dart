@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sync_fit/pages/settings/settings_screen.dart';
 
 class MiniCard extends ConsumerWidget {
   final IconData icon;
@@ -24,7 +25,12 @@ class MiniCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () {},
+      // onTap: () {
+      //   onTap;
+      //   // const snackBar = SnackBar(content: Text('Tap'));
+      //   // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      // },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         margin: const EdgeInsets.only(top: 16),

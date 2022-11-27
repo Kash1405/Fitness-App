@@ -21,25 +21,25 @@ final currIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-final activityProvider = FutureProvider<Activity>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getYellowCardData();
-});
+// final activityProvider = FutureProvider<Activity>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getYellowCardData();
+// });
 
 // final sleepDataProvider = FutureProvider<Sleep>((ref) async {
 //   final database = ref.watch(databaseApiProvider);
 //   return database.getSleepCardData();
 // });
 
-final heartrateProvider = FutureProvider<HeartBeat>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getHeartRateCardData();
-});
+// final heartrateProvider = FutureProvider<HeartBeat>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getHeartRateCardData();
+// });
 
-final spo2Provider = FutureProvider((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getSpo2CardData();
-});
+// final spo2Provider = FutureProvider((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getSpo2CardData();
+// });
 
 class HomePage extends ConsumerWidget {
   static const routename = '/home';
@@ -98,8 +98,8 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityData = ref.watch(activityProvider);
-    final heartrateData = ref.watch(heartrateProvider);
+    // final activityData = ref.watch(activityProvider);
+    // final heartrateData = ref.watch(heartrateProvider);
     return SafeArea(
       child: ListView(
         children: [
@@ -112,9 +112,9 @@ class HomeScreen extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    AutoSizeText(
+                    const AutoSizeText(
                       'Welcome back, Abhigyan!',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'SF-Pro Display',
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
@@ -153,13 +153,13 @@ class HomeScreen extends ConsumerWidget {
                     color: Colors.black,
                   ),
                 ),
-                activityData.when(
-                  data: (data) => ActivityCard(
-                    activity: data,
-                  ),
-                  loading: () => const SizedBox(),
-                  error: (error, stack) => const SizedBox(),
-                ),
+                // activityData.when(
+                //   data: (data) => ActivityCard(
+                //     activity: data,
+                //   ),
+                //   loading: () => const SizedBox(),
+                //   error: (error, stack) => const SizedBox(),
+                // ),
                 // const ActivityCard(),
                 MiniCard(
                   icon: FontAwesomeIcons.dumbbell,
@@ -198,18 +198,18 @@ class HomeScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
 
-                heartrateData.when(
-                  data: (data) => MiniCard(
-                      icon: FontAwesomeIcons.solidHeart,
-                      title: 'Heart Rate',
-                      time: DateFormat.jm().format(DateTime.now()),
-                      content: '${(data.max + data.min) ~/ 2} bpm',
-                      color: AppColors.heartRed.withOpacity(0.4),
-                      secondaryColor: Colors.red.shade900,
-                      onTap: () {}),
-                  loading: () => const SizedBox(),
-                  error: (error, stack) => const SizedBox(),
-                ),
+                // heartrateData.when(
+                //   data: (data) => MiniCard(
+                //       icon: FontAwesomeIcons.solidHeart,
+                //       title: 'Heart Rate',
+                //       time: DateFormat.jm().format(DateTime.now()),
+                //       content: '${(data.max + data.min) ~/ 2} bpm',
+                //       color: AppColors.heartRed.withOpacity(0.4),
+                //       secondaryColor: Colors.red.shade900,
+                //       onTap: () {}),
+                //   loading: () => const SizedBox(),
+                //   error: (error, stack) => const SizedBox(),
+                // ),
                 MiniCard(
                     icon: FontAwesomeIcons.water,
                     title: 'SpO2',

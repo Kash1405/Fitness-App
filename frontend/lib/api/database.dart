@@ -11,11 +11,11 @@ import 'package:sync_fit/utils/syncfit_exception.dart';
 import '../pages/login/providers/auth_provider.dart';
 import '../providers/providers.dart';
 
-final databaseApiProvider = Provider<Database>((ref) {
-  final dio = ref.watch(dioProvider);
-  final userId = ref.watch(futureTokensProvider).asData!.value!.userId;
-  return Database(dio, userId);
-});
+// final databaseApiProvider = Provider<Database>((ref) {
+//   final dio = ref.watch(dioProvider);
+//   final userId = ref.watch(futureTokensProvider).asData!.value!.userId;
+//   return Database(dio, userId);
+// });
 
 class Database {
   final Dio dio;
@@ -49,7 +49,8 @@ class Database {
 
   Future<void> getSpo2CardData() async {
     try {
-      final endpoint = '/fitness/spo2/$userId/${DateFormat("yyyy-MM-dd").format(DateTime.now())}';
+      final endpoint =
+          '/fitness/spo2/$userId/${DateFormat("yyyy-MM-dd").format(DateTime.now())}';
       final response = await dio.get(
         endpoint,
       );

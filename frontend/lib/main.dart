@@ -42,6 +42,7 @@ class SyncFit extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    print(router.location);
     return MaterialApp.router(
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
@@ -60,28 +61,33 @@ class SyncFit extends ConsumerWidget {
 /// If it is null, then the device wasn't registered at all.
 /// In that case it will return false and will redirect your to register screen.
 /// The [AppData] is encrypted and varies according to the platform being used
-final authProvider = Provider<AsyncValue<bool>>((ref) {
-  return ref.watch(futureTokensProvider).whenData((value) => value != null ? true : false);
-});
+/// 
+// final authProvider = Provider<AsyncValue<bool>>((ref) {
+//   return ref
+//       .watch(futureTokensProvider)
+//       .whenData((value) => value != null ? true : false);
+// });
 
-class AuthChecker extends ConsumerWidget {
-  static const routename = '/auth-checker';
-  const AuthChecker({Key? key}) : super(key: key);
+// class AuthChecker extends ConsumerWidget {
+//   static const routename = '/auth-checker';
+//   const AuthChecker({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authChecker = ref.watch(authProvider);
-    return authChecker.when(
-      data: (data) {
-        if (data) {
-          return HomePage();
-        }
-        return const LoginScreen();
-      },
-      error: (error, stackTrace) {
-        return ErrorScreen(error: error, stackTrace: stackTrace);
-      },
-      loading: () => const SplashScreen(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final authChecker = ref.watch(authProvider);
+//     return authChecker.when(
+//       data: (data) {
+//         if (data) {
+//           return HomePage();
+//         }
+//         return const LoginScreen();
+//       },
+//       error: (error, stackTrace) {
+//         return ErrorScreen(error: error, stackTrace: stackTrace);
+//       },
+//       loading: () => const SplashScreen(),
+//     );
+//   }
+// }
+
+

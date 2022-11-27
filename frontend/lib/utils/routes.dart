@@ -5,6 +5,7 @@ import 'package:sync_fit/main.dart';
 import 'package:sync_fit/pages/home/home_page.dart';
 import 'package:sync_fit/pages/registration_form/form_screen.dart';
 import 'package:sync_fit/pages/webview/webview.dart';
+import 'package:sync_fit/pages/activity/activity_page.dart';
 
 import '../pages/splash/splash_screen.dart';
 
@@ -13,12 +14,18 @@ import '../pages/splash/splash_screen.dart';
 final routerProvider = Provider<GoRouter>(
   (ref) {
     return GoRouter(
-      initialLocation: AuthChecker.routename,
+      // initialLocation: AuthChecker.routename,
+      initialLocation: "/",
       routes: [
+        // GoRoute(
+        //   name: 'AuthChecker',
+        //   path: AuthChecker.routename,
+        //   builder: (context, state) => const AuthChecker(),
+        // ),
         GoRoute(
-          name: 'AuthChecker',
-          path: AuthChecker.routename,
-          builder: (context, state) => const AuthChecker(),
+          name: 'LandingPage',
+          path: "/",
+          builder: (context, state) => HomePage(),
         ),
         GoRoute(
           name: 'SplashScreen',
@@ -37,13 +44,23 @@ final routerProvider = Provider<GoRouter>(
           path: HomePage.routename,
           builder: (context, state) => HomePage(),
         ),
-         GoRoute(
+        GoRoute(
+          name: 'ActivityPage',
+          path: ActivityPage.routename,
+          builder: (context, state) => ActivityPage(),
+        ),
+        // GoRoute(
+        //   name: 'HomePage',
+        //   path: HomePage.routename,
+        //   builder: (context, state) => HomePage(),
+        // ),
+        GoRoute(
           name: 'WebView',
           path: WebView.routename,
           builder: (context, state) => WebView(),
         ),
-
       ],
+      debugLogDiagnostics: true,
 
       /// TODO: Will beautify it More. but its rare to come across this page
       errorPageBuilder: (context, state) => MaterialPage(
