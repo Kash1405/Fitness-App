@@ -163,6 +163,7 @@ class ActivityScreen extends ConsumerWidget {
                 // ),
                 // const ActivityCard(),
                 MiniCard(
+                  page: HomeScreen(),
                   icon: FontAwesomeIcons.running,
                   title: 'Run',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -172,6 +173,7 @@ class ActivityScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
                 MiniCard(
+                    page: HomeScreen(),
                     icon: FontAwesomeIcons.hiking,
                     title: 'Hike',
                     time: DateFormat.jm().format(DateTime.now()),
@@ -180,6 +182,7 @@ class ActivityScreen extends ConsumerWidget {
                     secondaryColor: AppColors.paleBlue,
                     onTap: () {}),
                 MiniCard(
+                    page: HomeScreen(),
                     icon: FontAwesomeIcons.dumbbell,
                     title: 'Exercise',
                     time: DateFormat.jm().format(DateTime.now()),
