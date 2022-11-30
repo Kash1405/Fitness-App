@@ -17,14 +17,43 @@ import 'package:sync_fit/pages/settings/settings_screen.dart';
 import 'package:sync_fit/pages/webview/webview.dart';
 import 'package:sync_fit/utils/app_colors.dart';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+var initializationSettingsAndroid =
+    new AndroidInitializationSettings('@mipmap/ic_launcher');
+
+int id = 0;
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
 final currIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-final activityProvider = FutureProvider<Activity>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getYellowCardData();
-});
+Future<void> _showNotificationWithChronometer() async {
+  final AndroidNotificationDetails androidNotificationDetails =
+      AndroidNotificationDetails(
+    'your channel id',
+    'your channel name',
+    channelDescription: 'your channel description',
+    importance: Importance.max,
+    icon: "ic_launcher",
+    priority: Priority.high,
+    when: DateTime.now().millisecondsSinceEpoch - 120 * 1000,
+    usesChronometer: true,
+  );
+  final NotificationDetails notificationDetails =
+      NotificationDetails(android: androidNotificationDetails);
+  await flutterLocalNotificationsPlugin.show(
+      id++, 'plain title', 'plain body', notificationDetails,
+      payload: 'item x');
+}
+
+// final activityProvider = FutureProvider<Activity>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getYellowCardData();
+// });
 
 // final sleepDataProvider = FutureProvider<Sleep>((ref) async {
 //   final database = ref.watch(databaseApiProvider);
@@ -80,8 +109,8 @@ class ActivityPage extends ConsumerWidget {
   }
 }
 
-class LiftingScreen extends ConsumerWidget {
-  const LiftingScreen({
+class LiftingScreen2 extends ConsumerWidget {
+  const LiftingScreen2({
     Key? key,
   }) : super(key: key);
 
@@ -150,24 +179,42 @@ class LiftingScreen extends ConsumerWidget {
                 // ),
                 // const ActivityCard(),
                 MiniCard(
-                  page: const HomeScreen(),
+                  // page: const HomeScreen(),
                   icon: FontAwesomeIcons.dumbbell,
                   title: 'Easy - 20mins',
                   time: DateFormat.jm().format(DateTime.now()),
                   content: 'Start Challenge',
                   color: AppColors.parrotGreen,
                   secondaryColor: AppColors.paleGreen,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
+                  onTap: () async {
+                    // print("hello");
+
+                    // final snackBar = SnackBar(
+                    //   content: const Text('Yay! A SnackBar!'),
+                    //   action: SnackBarAction(
+                    //     label: 'Undo',
+                    //     onPressed: () {
+                    //       // Some code to undo the change.
+                    //     },
+                    //   ),
+                    // );
+
+                    await _showNotificationWithChronometer();
+
+                    // Find the ScaffoldMessenger in the widget tree
+                    // and use it to show a SnackBar.
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const HomeScreen(),
+                    //   ),
+                    //);
                   },
                 ),
                 MiniCard(
-                  page: const HomeScreen(),
+                  // page: const HomeScreen(),
                   icon: FontAwesomeIcons.dumbbell,
                   title: 'Medium - 50mins',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -185,7 +232,7 @@ class LiftingScreen extends ConsumerWidget {
                 ),
 
                 MiniCard(
-                  page: const HomeScreen(),
+                  // page: const HomeScreen(),
                   icon: FontAwesomeIcons.dumbbell,
                   title: 'Hard - 1.5hrs',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -195,7 +242,7 @@ class LiftingScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
                 MiniCard(
-                  page: const HomeScreen(),
+                  // page: const HomeScreen(),
                   icon: FontAwesomeIcons.dumbbell,
                   title: 'Extreme Mode - 2.5hrs',
                   time: DateFormat.jm().format(DateTime.now()),

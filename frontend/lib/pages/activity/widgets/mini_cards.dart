@@ -4,20 +4,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MiniCard extends ConsumerWidget {
-  final Widget page;
+  // final Widget page;
   final IconData icon;
   final String title;
-  final String time;
+  final String? time;
   final String content;
   final VoidCallback onTap;
   final Color color;
   final Color? secondaryColor;
   const MiniCard(
       {super.key,
-      required this.page,
+      // required this.page,
       required this.icon,
       required this.title,
-      required this.time,
+      this.time,
       required this.content,
       required this.onTap,
       this.secondaryColor,
@@ -26,14 +26,9 @@ class MiniCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => page,
-          ),
-        );
-      },
+      //
+      onTap: onTap,
+      //},
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         margin: const EdgeInsets.only(top: 16),
@@ -69,7 +64,7 @@ class MiniCard extends ConsumerWidget {
                     ],
                   ),
                 ),
-                AutoSizeText(time)
+                // AutoSizeText(time)
               ],
             ),
             const SizedBox(

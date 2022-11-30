@@ -11,7 +11,8 @@ import 'package:sync_fit/models/heartbeat.dart';
 import 'package:sync_fit/pages/account/account_page.dart';
 import 'package:sync_fit/pages/activity/running_page.dart';
 import 'package:sync_fit/pages/activity/swimming_page.dart';
-import 'package:sync_fit/pages/activity/lifting_page.dart';
+// import 'package:sync_fit/pages/activity/lifting_page.dart';
+import 'package:sync_fit/pages/activity/lifting_page_exercising.dart';
 import 'package:sync_fit/pages/activity/widgets/newtap.dart';
 import 'package:sync_fit/pages/home/widgets/activity_cards.dart';
 import 'package:sync_fit/pages/home/widgets/mini_cards.dart';
@@ -24,20 +25,20 @@ final currIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-final activityProvider = FutureProvider<Activity>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getYellowCardData();
-});
+// final activityProvider = FutureProvider<Activity>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getYellowCardData();
+// });
 
 // final sleepDataProvider = FutureProvider<Sleep>((ref) async {
 //   final database = ref.watch(databaseApiProvider);
 //   return database.getSleepCardData();
 // });
 
-final heartrateProvider = FutureProvider<HeartBeat>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getHeartRateCardData();
-});
+// final heartrateProvider = FutureProvider<HeartBeat>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getHeartRateCardData();
+// });
 
 final spo2Provider = FutureProvider((ref) async {
   final database = ref.watch(databaseApiProvider);
@@ -107,8 +108,8 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityData = ref.watch(activityProvider);
-    final heartrateData = ref.watch(heartrateProvider);
+    // final activityData = ref.watch(activityProvider);
+    // final heartrateData = ref.watch(heartrateProvider);
     return SafeArea(
       child: ListView(
         children: [
@@ -162,13 +163,13 @@ class HomeScreen extends ConsumerWidget {
                     color: Colors.black,
                   ),
                 ),
-                activityData.when(
-                  data: (data) => ActivityCard(
-                    activity: data,
-                  ),
-                  loading: () => const SizedBox(),
-                  error: (error, stack) => const SizedBox(),
-                ),
+                // activityData.when(
+                //   data: (data) => ActivityCard(
+                //     activity: data,
+                //   ),
+                //   loading: () => const SizedBox(),
+                //   error: (error, stack) => const SizedBox(),
+                // ),
                 // const ActivityCard(),
                 MiniCard(
                   icon: FontAwesomeIcons.dumbbell,
@@ -207,18 +208,18 @@ class HomeScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
 
-                heartrateData.when(
-                  data: (data) => MiniCard(
-                      icon: FontAwesomeIcons.solidHeart,
-                      title: 'Heart Rate',
-                      time: DateFormat.jm().format(DateTime.now()),
-                      content: '${(data.max + data.min) ~/ 2} bpm',
-                      color: AppColors.heartRed.withOpacity(0.4),
-                      secondaryColor: Colors.red.shade900,
-                      onTap: () {}),
-                  loading: () => const SizedBox(),
-                  error: (error, stack) => const SizedBox(),
-                ),
+                // heartrateData.when(
+                //   data: (data) => MiniCard(
+                //       icon: FontAwesomeIcons.solidHeart,
+                //       title: 'Heart Rate',
+                //       time: DateFormat.jm().format(DateTime.now()),
+                //       content: '${(data.max + data.min) ~/ 2} bpm',
+                //       color: AppColors.heartRed.withOpacity(0.4),
+                //       secondaryColor: Colors.red.shade900,
+                //       onTap: () {}),
+                //   loading: () => const SizedBox(),
+                //   error: (error, stack) => const SizedBox(),
+                // ),
                 MiniCard(
                     icon: FontAwesomeIcons.water,
                     title: 'SpO2',

@@ -21,20 +21,20 @@ final currIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-final activityProvider = FutureProvider<Activity>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getYellowCardData();
-});
+// final activityProvider = FutureProvider<Activity>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getYellowCardData();
+// });
 
 // final sleepDataProvider = FutureProvider<Sleep>((ref) async {
 //   final database = ref.watch(databaseApiProvider);
 //   return database.getSleepCardData();
 // });
 
-final heartrateProvider = FutureProvider<HeartBeat>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getHeartRateCardData();
-});
+// final heartrateProvider = FutureProvider<HeartBeat>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getHeartRateCardData();
+// });
 
 final spo2Provider = FutureProvider((ref) async {
   final database = ref.watch(databaseApiProvider);
@@ -98,8 +98,8 @@ class ActivityScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activityData = ref.watch(activityProvider);
-    final heartrateData = ref.watch(heartrateProvider);
+    // final activityData = ref.watch(activityProvider);
+    // final heartrateData = ref.watch(heartrateProvider);
     return SafeArea(
       child: ListView(
         children: [
@@ -163,7 +163,7 @@ class ActivityScreen extends ConsumerWidget {
                 // ),
                 // const ActivityCard(),
                 MiniCard(
-                  page: HomeScreen(),
+                  // page: HomeScreen(),
                   icon: FontAwesomeIcons.running,
                   title: 'Run',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -173,7 +173,7 @@ class ActivityScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
                 MiniCard(
-                    page: HomeScreen(),
+                    // page: HomeScreen(),
                     icon: FontAwesomeIcons.hiking,
                     title: 'Hike',
                     time: DateFormat.jm().format(DateTime.now()),
@@ -182,7 +182,7 @@ class ActivityScreen extends ConsumerWidget {
                     secondaryColor: AppColors.paleBlue,
                     onTap: () {}),
                 MiniCard(
-                    page: HomeScreen(),
+                    // page: HomeScreen(),
                     icon: FontAwesomeIcons.dumbbell,
                     title: 'Exercise',
                     time: DateFormat.jm().format(DateTime.now()),

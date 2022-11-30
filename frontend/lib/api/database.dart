@@ -22,17 +22,17 @@ class Database {
   final String userId;
   Database(this.dio, this.userId);
 
-  Future<Activity> getYellowCardData() async {
-    try {
-      final endpoint =
-          '/fitness/yellowbar/$userId/${DateFormat("yyyy-MM-dd").format(DateTime.now())}';
-      final response = await dio.get(endpoint);
-      return Activity.fromMap(response.data);
-    } on SyncFitException catch (e) {
-      log(e.toString());
-      rethrow;
-    }
-  }
+  // Future<Activity> getYellowCardData() async {
+  //   try {
+  //     final endpoint =
+  //         '/fitness/yellowbar/$userId/${DateFormat("yyyy-MM-dd").format(DateTime.now())}';
+  //     final response = await dio.get(endpoint);
+  //     return Activity.fromMap(response.data);
+  //   } on SyncFitException catch (e) {
+  //     log(e.toString());
+  //     rethrow;
+  //   }
+  // }
 
   // Future<Sleep> getSleepCardData() async {
   //   try {
@@ -49,7 +49,8 @@ class Database {
 
   Future<void> getSpo2CardData() async {
     try {
-      final endpoint = '/fitness/spo2/$userId/${DateFormat("yyyy-MM-dd").format(DateTime.now())}';
+      final endpoint =
+          '/fitness/spo2/$userId/${DateFormat("yyyy-MM-dd").format(DateTime.now())}';
       final response = await dio.get(
         endpoint,
       );
@@ -58,14 +59,14 @@ class Database {
     }
   }
 
-  Future<HeartBeat> getHeartRateCardData() async {
-    try {
-      final endpoint = '/fitness/heartrate/$userId';
-      final response = await dio.get(endpoint);
-      return HeartBeat.fromMap(response.data);
-    } on SyncFitException catch (e) {
-      log(e.toString());
-      rethrow;
-    }
-  }
+  // Future<HeartBeat> getHeartRateCardData() async {
+  //   try {
+  //     final endpoint = '/fitness/heartrate/$userId';
+  //     final response = await dio.get(endpoint);
+  //     return HeartBeat.fromMap(response.data);
+  //   } on SyncFitException catch (e) {
+  //     log(e.toString());
+  //     rethrow;
+  //   }
+  // }
 }

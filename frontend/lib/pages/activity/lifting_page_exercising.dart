@@ -17,14 +17,21 @@ import 'package:sync_fit/pages/settings/settings_screen.dart';
 import 'package:sync_fit/pages/webview/webview.dart';
 import 'package:sync_fit/utils/app_colors.dart';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import 'package:sync_fit/pages/activity/widgets/timer.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
 final currIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-final activityProvider = FutureProvider<Activity>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getYellowCardData();
-});
+// final activityProvider = FutureProvider<Activity>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getYellowCardData();
+// });
 
 // final sleepDataProvider = FutureProvider<Sleep>((ref) async {
 //   final database = ref.watch(databaseApiProvider);
@@ -38,7 +45,7 @@ class ActivityPage extends ConsumerWidget {
     const HomeScreen(),
     const SettingsScreen(),
     const AccountPage(),
-    const ActivityScreen(),
+    const LiftingScreen(),
   ];
 
   @override
@@ -80,8 +87,8 @@ class ActivityPage extends ConsumerWidget {
   }
 }
 
-class ActivityScreen extends ConsumerWidget {
-  const ActivityScreen({
+class LiftingScreen extends ConsumerWidget {
+  const LiftingScreen({
     Key? key,
   }) : super(key: key);
 
@@ -123,7 +130,7 @@ class ActivityScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const AutoSizeText(
-                  'Challenges: Swimming',
+                  'Easy Workout',
                   style: TextStyle(
                     fontFamily: 'SF-Pro Display',
                     fontSize: 32,
@@ -133,7 +140,7 @@ class ActivityScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 const AutoSizeText(
-                  'Challenge Robot',
+                  'Here are some easy exercises for you!',
                   style: TextStyle(
                     fontFamily: 'SF-Pro Display',
                     fontSize: 20,
@@ -150,42 +157,78 @@ class ActivityScreen extends ConsumerWidget {
                 // ),
                 // const ActivityCard(),
                 MiniCard(
-                  icon: FontAwesomeIcons.personSwimming,
-                  title: 'Easy - 20mins',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: 'Start Challenge',
+                  // page: const HomeScreen(),
+                  icon: FontAwesomeIcons.dumbbell,
+                  title: '20x',
+                  // time: DateFormat.jm().format(DateTime.now()),
+                  content: 'Jumping Jacks',
+                  color: AppColors.parrotGreen,
+                  secondaryColor: AppColors.paleGreen,
+                  onTap: () async {
+                    // print("hello");
+
+                    // final snackBar = SnackBar(
+                    //   content: const Text('Yay! A SnackBar!'),
+                    //   action: SnackBarAction(
+                    //     label: 'Undo',
+                    //     onPressed: () {
+                    //       // Some code to undo the change.
+                    //     },
+                    //   ),
+                    // );
+
+                    // await _showNotificationWithChronometer();
+
+                    // Find the ScaffoldMessenger in the widget tree
+                    // and use it to show a SnackBar.
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const HomeScreen(),
+                    //   ),
+                    //);
+                  },
+                ),
+                MiniCard(
+                  // page: const HomeScreen(),
+                  icon: FontAwesomeIcons.dumbbell,
+                  title: '20x',
+                  // time: DateFormat.jm().format(DateTime.now()),
+                  content: 'Russian Twists',
+                  color: AppColors.parrotGreen,
+                  secondaryColor: AppColors.paleGreen,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                MiniCard(
+                  // page: const HomeScreen(),
+                  icon: FontAwesomeIcons.dumbbell,
+                  title: '20x',
+                  // time: DateFormat.jm().format(DateTime.now()),
+                  content: 'Sit-Ups',
                   color: AppColors.parrotGreen,
                   secondaryColor: AppColors.paleGreen,
                   onTap: () {},
                 ),
-                MiniCard(
-                  icon: FontAwesomeIcons.personSwimming,
-                  title: 'Medium - 1hr',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: 'Start Challenge',
-                  color: Colors.yellow,
-                  secondaryColor: Color.fromARGB(255, 175, 158, 5),
-                  onTap: () {},
-                ),
-
-                MiniCard(
-                  icon: FontAwesomeIcons.personSwimming,
-                  title: 'Hard - 2hrs',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: 'Start Challenge',
-                  color: Colors.red,
-                  secondaryColor: Color.fromARGB(255, 138, 36, 3),
-                  onTap: () {},
-                ),
-                MiniCard(
-                  icon: FontAwesomeIcons.personSwimming,
-                  title: 'Extreme Mode - 3hrs',
-                  time: DateFormat.jm().format(DateTime.now()),
-                  content: 'Start Challenge',
-                  color: Colors.purple,
-                  secondaryColor: Color.fromARGB(255, 31, 5, 76),
-                  onTap: () {},
-                ),
+                // MiniCard(
+                //   // page: const HomeScreen(),
+                //   icon: FontAwesomeIcons.dumbbell,
+                //   title: 'Extreme Mode - 2.5hrs',
+                //   time: DateFormat.jm().format(DateTime.now()),
+                //   content: 'Start Challenge',
+                //   color: AppColors.parrotGreen,
+                //   secondaryColor: AppColors.paleGreen,
+                //   onTap: () {},
+                // ),
 
                 //   data: (data) => MiniCard(
                 //       icon: FontAwesomeIcons.solidHeart,
@@ -200,15 +243,65 @@ class ActivityScreen extends ConsumerWidget {
                 // ),
 
                 const SizedBox(height: 30),
-                const AutoSizeText(
-                  'Leaderboard',
-                  style: TextStyle(
-                    fontFamily: 'SF-Pro Display',
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                Container(
+                  width: 500.0,
+                  padding: const EdgeInsets.only(top: 3.0, right: 0.0),
+                  child: const AutoSizeText(
+                    'Timer',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'SF-Pro Display',
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
+                // const AutoSizeText(
+                //   'Timer',
+                //   textAlign: TextAlign.center,
+                //   style: TextStyle(
+                //     fontFamily: 'SF-Pro Display',
+                //     fontSize: 30,
+                //     fontWeight: FontWeight.w600,
+                //     color: Colors.black,
+                //   ),
+                // ),
+                Container(
+                  width: 500.0,
+                  padding: EdgeInsets.only(top: 3.0, right: 0.0),
+                  child: CountDownTimer(
+                    secondsRemaining: 10,
+                    whenTimeExpires: () {
+                      // print("Done");
+
+                      const snackBar = SnackBar(
+                        content: Text('Hurray!! Workout completed :)'),
+                        // action: SnackBarAction(
+                        //   label: 'Undo',
+                        //   onPressed: () {
+                        //     // Some code to undo the change.
+                        //   },
+                        //),
+                      );
+
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                      // setState(() {
+                      //   hasTimerStopped = true;
+                      // });
+                    },
+                    countDownTimerStyle: const TextStyle(
+                      // color: Color(0XFFf5a623),
+                      // fontSize: 47.0,
+                      fontFamily: 'SF-Pro Display',
+                      fontSize: 70,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.orange,
+                      height: 0.0,
+                    ),
+                  ),
+                )
 
                 // const AutoSizeText(
                 //   'Recipe of the day',
@@ -226,4 +319,6 @@ class ActivityScreen extends ConsumerWidget {
       ),
     );
   }
+
+  void setState(Null Function() param0) {}
 }

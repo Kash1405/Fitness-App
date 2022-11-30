@@ -21,10 +21,10 @@ final currIndexProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-final activityProvider = FutureProvider<Activity>((ref) async {
-  final database = ref.watch(databaseApiProvider);
-  return database.getYellowCardData();
-});
+// final activityProvider = FutureProvider<Activity>((ref) async {
+//   final database = ref.watch(databaseApiProvider);
+//   return database.getYellowCardData();
+// });
 
 // final sleepDataProvider = FutureProvider<Sleep>((ref) async {
 //   final database = ref.watch(databaseApiProvider);
@@ -150,7 +150,7 @@ class SwimmingScreen extends ConsumerWidget {
                 // ),
                 // const ActivityCard(),
                 MiniCard(
-                  page: HomeScreen(),
+                  // page: HomeScreen(),
                   icon: FontAwesomeIcons.personSwimming,
                   title: 'Easy - 20mins',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -160,7 +160,7 @@ class SwimmingScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
                 MiniCard(
-                  page: HomeScreen(),
+                  // page: HomeScreen(),
                   icon: FontAwesomeIcons.personSwimming,
                   title: 'Medium - 1hr',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -171,7 +171,7 @@ class SwimmingScreen extends ConsumerWidget {
                 ),
 
                 MiniCard(
-                  page: HomeScreen(),
+                  // page: HomeScreen(),
                   icon: FontAwesomeIcons.personSwimming,
                   title: 'Hard - 2hrs',
                   time: DateFormat.jm().format(DateTime.now()),
@@ -181,7 +181,7 @@ class SwimmingScreen extends ConsumerWidget {
                   onTap: () {},
                 ),
                 MiniCard(
-                  page: HomeScreen(),
+                  // page: HomeScreen(),
                   icon: FontAwesomeIcons.personSwimming,
                   title: 'Extreme Mode - 3hrs',
                   time: DateFormat.jm().format(DateTime.now()),
