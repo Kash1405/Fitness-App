@@ -271,7 +271,7 @@ class LiftingScreen extends ConsumerWidget {
                   width: 500.0,
                   padding: EdgeInsets.only(top: 3.0, right: 0.0),
                   child: CountDownTimer(
-                    secondsRemaining: 10,
+                    secondsRemaining: 1200,
                     whenTimeExpires: () {
                       // print("Done");
 
